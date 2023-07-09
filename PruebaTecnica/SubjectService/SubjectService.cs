@@ -9,7 +9,7 @@ namespace PruebaTecnica.SubjectService
         // Method to validate the document
         private bool ValidateDocument(string document)
         {
-            if (document.Length > 7)
+            if (document.Length >= 7)
             {
                 return true;
             }
@@ -19,23 +19,25 @@ namespace PruebaTecnica.SubjectService
             }
         }
 
-        //Method to validate the email
-        private bool ValidateEmail(string email)
+        // Method to validate the email
+        public bool ValidateEmail(string email)
         {
-            if (email.Contains("@"))
+            try
             {
-                return true;
+                var address = new System.Net.Mail.MailAddress(email);
+                return address.Address == email;
             }
-            else
+            catch
             {
                 return false;
             }
         }
+
 
         // Method to validate the phone
         private bool ValidatePhone(string phone)
         {
-            if (phone.Length == 10)
+            if (phone.Length > 9)
             {
                 return true;
             }
@@ -72,7 +74,7 @@ namespace PruebaTecnica.SubjectService
         //Method to validate the birthdate
         private bool ValidateBirthday(DateTime birthday)
         {
-            DateTime actualDate = DateTime.Today;
+            DateTime actualDate = DateTime.Now;
 
             if (birthday > actualDate)
             {

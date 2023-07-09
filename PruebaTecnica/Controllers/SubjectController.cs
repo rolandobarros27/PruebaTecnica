@@ -72,7 +72,7 @@ namespace PruebaTecnica.Controllers
         }
 
         [HttpDelete]
-        [Route("DeleteSubject")]
+        [Route("DeleteSubject/{document}")]
         public async Task<IActionResult> DeleteSubject(string document)
         {
             try
@@ -83,7 +83,7 @@ namespace PruebaTecnica.Controllers
                     _dbcontext.Subjects.Remove(subject);
                     _dbcontext.SaveChanges();
                 }
-                return Ok(subject);
+                return Ok("Persona eliminada satisfactoriamente");
             }
             catch (Exception ex)
             {
